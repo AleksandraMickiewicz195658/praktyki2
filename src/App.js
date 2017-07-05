@@ -3,74 +3,32 @@ import React, { Component } from "react";
 //import PropTypes from "prop-types"; 
 // import "./App.css"; 
 
-import PostForm from "./posts/PostForm.js";
-import PostList from "./posts/PostList.js";
 
+import {Router, Route, IndexRoute, Link, hashHistory} from "react-router";
+import Home from "./Home";
+import PostPage from "./posts/PostPage";
+import PostsDetails from "./posts/PostsDetails";
+import Layout from "./Layout";
 
 
 
 class App extends Component{ 
 
- constructor(props){    
-super(props);   
-
-this.state = {
-fraza:"",
-posts: [
-{ title: 'pierwszy', timestamp: 1},        
-{ title: 'drugi', timestamp: 2},        
-{ title: 'trzeci', timestamp: 3},        
-{ title: 'czwarty', timestamp: 4},        
-{ title: 'piąty', timestamp: 5},        
-{ title: 'szósty', timestamp: 6},        
-{ title: 'siódmy', timestamp: 7},],    
-}; 
-   
- 
+	render() { 
+		return (      
+		<div className="App" style={{padding:'5px'}}> 
+			<Router history={hashHistory} >
+				<Route path='/' component={Layout}>
+					<IndexRoute component={Home}></IndexRoute>
+					<Route path="posts" component={PostPage} />					
+					<Route path="posts-details" component={PostsDetails} />
+				</Route>
+			</Router>       
+			
+		</div>    
+		);  
+	} 
 } 
-
-addPost = post => {   
-	this.setState({
-		posts:  [...this.state.posts, {...post,timestamp:new Date().getTime()}],
-
-	});
- 
-
-}
-
-
-usun = timestamp => {
-	this.setState({
-	posts: this.state.posts.filter(p=> p.timestamp!=timestamp),
-});
-}
-
-
-Szukaj = (e) =>{
-e.preventDefault();
-this.setState({
-fraza: e.target.value,
-});
-
-}
-
-
-
-render() { 
-const postsToRender = this.state.posts.filter(p=> p.title.includes(this.state.fraza)); 
-return (      
-<div className="App">        
-<PostForm onSubmit={this.addPost} />
-<form>
-<label>Wyszukiwanie</label>
-<input onChange={this.Szukaj} value={this.state.fraza}/>
-
-
-</form>
-<PostList Usun={this.usun} posts={postsToRender}/>
-</div>    
-);  
-} } 
 
 
 

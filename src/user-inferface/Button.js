@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
 class Button extends React.Component{
 render(){
-	return (<button style={{color:'#fff', border: "none", backgroundColor: "green"}} onClick={this.props.onClick}>{this.props.label}</button>);
-}
+	return (
+	<button className="btn btn-success" onClick={this.props.onClick}>{this.props.label}</button>);
+} 
 
 
 }
