@@ -1,4 +1,16 @@
-import {createStore} from "redux";
+import { createStore, combineReducers } from "redux";
+
+
+const counter = (state = 0, action) =>{
+    switch(action.type){
+        case 'INCREMENT':
+            return state+1;
+        case 'DECREMENT':
+            return state-1;
+        default:
+            return state;  
+    }
+};
 
 const posty =[
 		{ title: 'pierwszy', timestamp: 1},        
@@ -10,28 +22,45 @@ const posty =[
 		{ title: 'siódmy', timestamp: 20},];
 
 let inicialState = {
-    posts: [...posty], 
+    postCollections: [...posty], 
+    postCounter: posty.length
+    };
 
-	counter: posty.length,
-};
 
-
-const reducer = (state = inicialState, action) =>{
+const posts = (state = inicialState, action) =>{
     switch(action.type){
-        case 'INCREMENT':
-            return {...state, counter   : state.counter+1};
-        case 'DECREMENT':
-            return {...state, counter   : state.counter-1};
         case 'ADDPOSTS':         
-            return {counter: state.counter+1, posts:[...state.posts,{title:action.post.title, timestamp: action.post.timestamp}] };
+            return {...state,postCounter: state.postCounter+1,postCollections:[...state.postCollections,{title:action.post.title, timestamp: action.post.timestamp}] };
         case 'REMOVEPOSTS':         
-            return {counter: state.counter-1, posts: state.posts.filter(p=> p.timestamp!==action.timestamp)};
+            return {...state,postCounter: state.postCounter-1, postCollections: state.postCollections.filter(p=> p.timestamp!==action.timestamp)};
         default:
             return state;
     }
 }
 
-const store = createStore(reducer);
+const inicialUser = {
+    mail: "",
+}
+
+const session = (state = inicialUser, action) =>{
+    switch(action.type){
+        case 'SING_IN':         
+            return {mail:action.mail};
+        case 'SING_OUT':         
+            return inicialUser;
+        default:
+            return state;
+    }  
+}
+
+
+const rootReducer = combineReducers({
+    posts: posts,
+    counter: counter,
+    session:session
+});
+
+const store = createStore(rootReducer);
 
 
 export default store;

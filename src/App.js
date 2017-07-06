@@ -10,6 +10,7 @@ import PostPage from "./posts/PostPage";
 import PostsDetails from "./posts/PostsDetails";
 import Layout from "./Layout";
 import AddPost from "./posts/AddPost";
+import LoginPage from "./LoginPage";
 
 
 
@@ -25,6 +26,7 @@ class App extends Component{
 					<Route path="posts" component={PostPage} />					
 					<Route path="posts-details" component={PostsDetails} />
 					<Route path="add-post" component={AddPost} />
+					<Route path="login" component={LoginPage} />					
 				</Route>
 			</Router>       
 			

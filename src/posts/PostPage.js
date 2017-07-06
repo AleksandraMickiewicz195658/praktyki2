@@ -32,7 +32,7 @@ class PostPage extends React.Component{
 
 	
 render(){
-    	const postsToRender = this.props.posts.filter(p=> p.title.includes(this.state.fraza)); 
+    	const postsToRender = this.props.posts.postCollections.filter(p=> p.title.includes(this.state.fraza)); 
 
 	return(
 		<div>
