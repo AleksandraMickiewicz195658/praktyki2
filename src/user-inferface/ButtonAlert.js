@@ -7,7 +7,7 @@ class ButtonAlert extends React.Component{
     
     }
     render(){
-        return (<Button onClick={this.showAletr} label={this.props.label}/>
+        return (<Button onClick={this.props.onClick} label={this.props.label}/>
 
         );
     }

@@ -8,7 +8,6 @@ import ParityList from './ParityList';
 class PostPage extends React.Component{
     	constructor(props){    
 	super(props);   
-
 	this.state = {
 		fraza:"",
 		posts: [
@@ -19,7 +18,8 @@ class PostPage extends React.Component{
 		{ title: 'piąty', timestamp: 5},        
 		{ title: 'szósty', timestamp: 6},        
 		{ title: 'siódmy', timestamp: 20},],    
-		}; 		
+	}; 
+	this.props.injectedProp(this.state.posts.length);
 	} 
 
 	addPost = post => {   
@@ -27,13 +27,16 @@ class PostPage extends React.Component{
 			posts:  [...this.state.posts, {...post,timestamp:new Date().getTime()}],
 
 		});
+
+		this.props.injectedProp(this.state.posts.length+1);
 	}
 
 
 	usun = timestamp => {
 		this.setState({
 		posts: this.state.posts.filter(p=> p.timestamp!==timestamp),
-		});
+	});
+	this.props.injectedProp(this.state.posts.length -1);
 	}
 
 
@@ -48,8 +51,9 @@ render(){
 
 	return(
 		<div>
+			{this.props.injectedProp}
 		<PostForm onSubmit={this.addPost} />
-		<ButtonAlert label="cc"/>
+		<ButtonAlert label="cc" onClick={this.props.injectedProp} />
 			<form>
 				<label>Wyszukiwanie</label>
 				<input className="form-control" 

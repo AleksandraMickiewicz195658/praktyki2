@@ -5,13 +5,23 @@ import {Link} from "react-router";
 class Layout extends React.Component{
     
     constructor(props){
-    super(props);
-    this.liznik = 0;
+            super(props);
+
+    this.state = {
+        licznik:0
+
+    };
+    
     
 }
 
 zmienlicznik = (liczba) =>{
-this.liznik=liczba;
+this.setState(
+    this.state = {
+        licznik: liczba
+    }
+
+);
 }
 
 render(){
@@ -22,7 +32,7 @@ render(){
              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
                     <li><p className="navbar-text" >Licznik:</p></li>
-                    <li><p className="navbar-text" >{this.liznik}</p></li>
+                    <li><p className="navbar-text" >{this.state.licznik}</p></li>
                     
                     <li className=""><Link to="/">home</Link></li>
                     <li className=""><Link to="/posts">Post List</Link></li>
@@ -32,7 +42,8 @@ render(){
             </div>
         </nav>
                 <div className="container">
-                {this.props.children}
+                    {React.Children.map(this.props.children, (c) => React.cloneElement(c,{injectedProp: this.zmienlicznik}))}
+                
                 </div>
         </div>
     );
