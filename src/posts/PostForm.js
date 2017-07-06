@@ -1,7 +1,7 @@
 import React from "react"; 
 
 import Button from "../user-inferface/Button";
-import styled from 'styled-components';
+//import styled from 'styled-components';
 class PostForm extends React.Component{
 	constructor(props){
 		super(props);

@@ -3,13 +3,6 @@ import Post from "./Post";
 
 
 class PostList extends Component{
-
-	usun = post => {   
-		console.log(post.id);
-	}
-  
-
-
 	render(){
 	return(
 	<div className={this.props.className}>       

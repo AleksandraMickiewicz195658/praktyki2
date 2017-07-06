@@ -1,42 +1,22 @@
 import React from "react";
 import {Link} from "react-router";
+import {connect} from "react-redux";
 
 
-class Layout extends React.Component{
-    
-    constructor(props){
-            super(props);
-
-    this.state = {
-        licznik:0
-
-    };
-    
-    
-}
-
-zmienlicznik = (liczba) =>{
-this.setState(
-    this.state = {
-        licznik: liczba
-    }
-
-);
-}
-
+class Layout extends React.Component{    
 render(){
     return(
         <div>
-        <nav className="navbar navbar-default">
+        <nav className="navbar navbar-default navbar-fixed-top">
 
              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                    <li><p className="navbar-text" >Licznik:</p></li>
-                    <li><p className="navbar-text" >{this.state.licznik}</p></li>
-                    
-                    <li className=""><Link to="/">home</Link></li>
+                    <li className=""><Link to="/">Home</Link></li>
                     <li className=""><Link to="/posts">Post List</Link></li>
                     <li className=""><Link to="/posts-details">Post Details</Link></li>
+                    <li className=""><Link to="/add-post">Add new post</Link></li>
+                    <li><p className="navbar-text navbar-right" >Counter:</p></li>
+                    <li><p className="navbar-text navbar-right" >{this.props.counter}</p></li>                    
 
                 </ul>
             </div>
@@ -52,4 +32,11 @@ render(){
 
 }
 
-export default Layout;
+
+const mapStateToProps = (state) => {
+	return{
+		counter: state.counter,	};
+};
+
+
+export default connect(mapStateToProps)(Layout);
