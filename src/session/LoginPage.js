@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Button from "./user-inferface/Button";
+import Button from "../user-inferface/Button";
 import { connect } from "react-redux";
 
 class LoginPage extends React.Component{
@@ -37,8 +37,8 @@ class LoginPage extends React.Component{
             this.setState({
             message:"Zalogowano",
 
-            })
-            console.log(response)
+            });
+            console.log(response);
         }).catch((error) =>{
             alert("Blad logowanie");
             this.setState({

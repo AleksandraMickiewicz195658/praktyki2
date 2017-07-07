@@ -22,7 +22,7 @@ class Layout extends React.Component{
                             <li className=""><Link to="/posts-details">Post Details</Link></li>
                             <li className=""><Link to="/add-post">Add new post</Link></li>
                             <li className=""><Link to="/login">Sing In</Link></li>
-                            <li><p className="navbar-text navbar-right" > {PostSTatus(this.props.posts.postCounter)} {UserSTatus(this.props.user.mail)} </p></li>
+                            <li><p className="navbar-text navbar-right" > {PostSTatus(this.props.posts.postCollections.length)} {UserSTatus(this.props.user.mail)} </p></li>
                         </ul>
                          <form className="navbar-form navbar-left">
 
@@ -41,7 +41,7 @@ class Layout extends React.Component{
 
 const PostSTatus = (postCount) =>{
     if(postCount > 0 ){
-        return `counter ${postCount}`
+        return `liczba postów ${postCount}`
     }
     else return "nie ma postow"
 

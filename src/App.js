@@ -10,7 +10,7 @@ import PostPage from "./posts/PostPage";
 import PostsDetails from "./posts/PostsDetails";
 import Layout from "./Layout";
 import AddPost from "./posts/AddPost";
-import LoginPage from "./LoginPage";
+import LoginPage from "./session/LoginPage";
 
 
 
