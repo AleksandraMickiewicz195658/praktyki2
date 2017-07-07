@@ -7,7 +7,7 @@ class PostList extends Component{
 	return(
 	<div className={this.props.className}>       
 		{this.props.posts.map((d, index) => 
-		<Post Usun={this.props.Usun} key={d.timestamp} title={d.title } 
+		<Post show={this.props.show} Usun={this.props.Usun} key={d.timestamp} title={d.title } 
 		timestamp={d.timestamp}/>)}         
 	</div> 
 	);

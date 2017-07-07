@@ -9,6 +9,22 @@ class Layout extends React.Component{
 
 
     }
+    LoginStatus = (user) =>{
+    if(user ==="" )
+        return (
+        <ul  className="nav navbar-nav">
+        <li className=""><Link to="/login">Sing In</Link></li>
+        <li className=""><Link to="/register">Sing Up</Link></li>
+        </ul>
+        );
+    else return (
+        <form className="navbar-form navbar-left">
+            <button onClick={this.singOut} className="btn btn-default">Wyloguj</button>
+        </form>
+
+    );
+
+}
 
     render(){
         return(
@@ -21,14 +37,13 @@ class Layout extends React.Component{
                             <li className=""><Link to="/posts">Post List</Link></li>
                             <li className=""><Link to="/posts-details">Post Details</Link></li>
                             <li className=""><Link to="/add-post">Add new post</Link></li>
-                            <li className=""><Link to="/login">Sing In</Link></li>
-                            <li><p className="navbar-text navbar-right" > {PostSTatus(this.props.posts.postCollections.length)} {UserSTatus(this.props.user.mail)} </p></li>
                         </ul>
-                         <form className="navbar-form navbar-left">
-
-                        <button onClick={this.singOut} className="btn btn-default">Wyloguj</button>
-                        </form>
-                        
+                        <form>
+                         {this.LoginStatus(this.props.user.mail)}
+                         </form>
+                        <ul>
+                            <li><p className="navbar-text" > {PostSTatus(this.props.posts.postCollections.length)} {UserSTatus(this.props.user.mail)} </p></li>
+                        </ul>                            
                         </div>
                 </nav>
                 <div className="container">
@@ -38,6 +53,8 @@ class Layout extends React.Component{
         );
     }
 }
+
+
 
 const PostSTatus = (postCount) =>{
     if(postCount > 0 ){
@@ -51,7 +68,7 @@ const UserSTatus = (user) =>{
     if(user ==="" ){
         return "Nie jesteś zalogowany";
     }
-    else return `Witaj ${user}`;
+    else return `Witaj ${user} `;
 
 }
 

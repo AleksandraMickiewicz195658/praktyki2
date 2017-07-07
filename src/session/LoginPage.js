@@ -28,16 +28,12 @@ class LoginPage extends React.Component{
     }
 
     onSubmit = (event) =>{
-		event.preventDefault();
-        axios.post('http://192.168.10.127:3001/sign-in',{
-            email:this.state.mail,
-            password:  this.state.password
-        }).then((response) =>{
+        axios.post("https://praktyki-react.herokuapp.com/api/v1/sessions", {      
+                user: { email: this.state.mail, password: this.state.password }    })
+            .then((response) =>{
             alert("Zalogowano");
-            this.setState({
-            message:"Zalogowano",
-
-            });
+            this.props.dispatch({type: "SING_IN" , mail:this.state.mail, token: response.data.data.auth_token});
+		    this.props.router.push('/posts');
             console.log(response);
         }).catch((error) =>{
             alert("Blad logowanie");
@@ -48,8 +44,7 @@ class LoginPage extends React.Component{
             console.log(error)})
         };       
 
-        //this.props.dispatch({type: "SING_IN" , mail:this.state.mail});
-		//this.props.router.push('/posts');
+
         
         errorMessage = (blad) =>{
             return blad;
@@ -64,14 +59,14 @@ class LoginPage extends React.Component{
 		<form><div className="panel panel-default" >
 			<div className="row" style={{padding:'5px'}}>
 				<div className="col-md-4">
-					<label>Mail</label><br/>
+					<label>email</label><br/>
 					<input 
 						className="form-control" 
 						style={{width:'200px'}} 
 						onChange={this.updateMail} 
 						value={this.state.mail}
                          />
-                    <label>Password</label><br/>
+                    <label>password</label><br/>
 					<input 
 						className="form-control" 
 						style={{width:'200px'}} 
@@ -82,7 +77,7 @@ class LoginPage extends React.Component{
 				</div>
 				
 				<div  >
-				<Button className="btn btn-success" label="Zaloguj" onClick={this.onSubmit}/>
+				<Button className="btn btn-success" label="Sing In" onClick={this.onSubmit}/>
 				</div>
 			</div></div>
             

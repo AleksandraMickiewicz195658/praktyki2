@@ -2,12 +2,13 @@
 
 const inicialUser = {
     mail: "",
+    token: null,
 }
 
 const session = (state = inicialUser, action) =>{
     switch(action.type){
         case 'SING_IN':         
-            return {mail:action.mail};
+            return {...state,token:action.token,mail:action.mail};
         case 'SING_OUT':         
             return inicialUser;
         default:

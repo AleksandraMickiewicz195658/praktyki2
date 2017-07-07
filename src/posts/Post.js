@@ -1,6 +1,8 @@
 import React from "react"; 
 import Button from "../user-inferface/Button";
 import styled from 'styled-components';
+import { connect} from "react-redux";
+ 
 
 class Post extends React.Component{  
     constructor(props){
@@ -12,6 +14,11 @@ class Post extends React.Component{
     this.props.Usun(this.props.timestamp);
     }
 
+    show = () => {
+    this.props.show(this.props.timestamp);
+
+    }
+
     render() {    
         return (
         <div>
@@ -19,6 +26,7 @@ class Post extends React.Component{
                 <div>title: {this.props.title} </div>
                 <div>timestamp: {this.props.timestamp}</div><br/>            
                 <Button onClick={this.remove} label="USUN" />
+                <Button onClick={this.show} label="Show post" />
             </StypedPost>
         </div>            
         );  
@@ -37,5 +45,10 @@ const StypedPost = styled.div`
     }
 `;
 
+const mapStateToProps = (state) => {
+	return state;
+};
 
-export default Post;
+
+
+export default connect(mapStateToProps)(Post);

@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from "redux";
+import { compose, createStore, combineReducers } from "redux";
+import persistState from 'redux-localstorage'
 import session from "./session/sessionStore";
 import posts from "./posts/posts";
 import counter from "./counter";
@@ -9,7 +10,9 @@ const rootReducer = combineReducers({
     session:session
 });
 
-const store = createStore(rootReducer);
+const enhancer = compose(persistState("session"));
+
+const store = createStore(rootReducer,{},enhancer);
 
 
 export default store;

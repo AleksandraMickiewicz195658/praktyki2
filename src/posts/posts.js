@@ -13,6 +13,7 @@ const inicialPostsCollections =[
 
 let inicialState = {
     postCollections: [...inicialPostsCollections], 
+    postsToShow: "",
     };
 
 
@@ -22,6 +23,8 @@ const posts = (state = inicialState, action) =>{
             return {...state,postCollections:[...state.postCollections,{title:action.post.title, timestamp: action.post.timestamp}] };
         case 'REMOVEPOSTS':         
             return {...state,postCollections: state.postCollections.filter(p=> p.timestamp!==action.timestamp)};
+        case 'SHOW_POST':
+            return {...state,postsToShow: action.timestamp};
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import PostList from "./PostList.js";
 import ButtonAlert from '../user-inferface/ButtonAlert'
 //import ParityList from './ParityList';
 import { connect } from "react-redux";
+import {withRouter} from "react-router"
 
 class PostPage extends React.Component{
     constructor(props){    
@@ -30,6 +31,11 @@ class PostPage extends React.Component{
 		});
 	}
 
+	show = timestamp =>{
+		this.props.dispatch({type: "SHOW_POST",timestamp: timestamp});
+    	this.props.router.push('/posts-details');
+	}
+
 	
 render(){
     	const postsToRender = this.props.posts.postCollections.filter(p=> p.title.includes(this.state.fraza)); 
@@ -44,7 +50,7 @@ render(){
 				style={{width:'800px',marginBottom:'10px'}} 
 				onChange={this.Szukaj} value={this.state.fraza}/>
 			</form>
-			<PostList Usun={this.usun} posts={postsToRender}/>
+			<PostList show={this.show} Usun={this.usun} posts={postsToRender}/>
 			
 		</div>);
 	} 
@@ -55,9 +61,9 @@ render(){
 
 const mapStateToProps = (state) => {
 	return{
-		posts: state.posts	
+		posts: state.posts,
 	};
 };
 
 
-export default connect(mapStateToProps)(PostPage);
+export default connect(mapStateToProps)(withRouter(PostPage));
