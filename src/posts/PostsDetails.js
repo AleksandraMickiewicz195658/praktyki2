@@ -1,47 +1,37 @@
-import React from "react";
-import {connect} from "react-redux";
+import React from 'react';
+import apiClient from '../lib/api-client';
 
-class PostDetails extends React.Component{
+class PostDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: {
+        id: '',
+        title: '',
+        body: '',
+      },
+    };
+  }
 
-
-
-        PostsStatus = (id) =>{
-        if(id===""){
-                return "Wybierz posta z listy"
-        }else{
-                let post = this.props.posts.postCollections.find(p=> p.timestamp === id);
-                if(post!==null){
-                        return(
-                                <div>
-                                Wybrany Post:
-                                <div>tytuł posta: {post.title}</div>
-                                <div>timestamp: {post.timestamp}</div>
-                                </div>
-                        );
-                }
-                else return "Blad";
-        }
-}
-
-render(){
-	return (
-        <div>
-        {this.PostsStatus(this.props.posts.postsToShow)}</div>
-        );
-} 
-
-
-}
-
-
-
-const mapStateToProps = (state) => {
-	return ({
-                posts: state.posts,
+  componentDidMount() {
+    apiClient
+      .get(`/example/api/v1/posts/` + this.props.params.id)
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          posts: response.data,
         });
-};
+      })
+      .catch(error => console.log(error));
+  }
 
+  render() {
+    return (
+      <div>
+        {this.state.posts.title} {this.state.posts.body}
+      </div>
+    );
+  }
+}
 
-
-
-export default connect(mapStateToProps)(PostDetails);
+export default PostDetails;
